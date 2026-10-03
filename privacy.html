@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy · Pulsar</title>
+<meta name="description" content="Pulsar collects no personal data. Everything stays on your device.">
+<meta property="og:title" content="Privacy Policy · Pulsar">
+<meta property="og:description" content="Pulsar collects no personal data. Everything stays on your device.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="es" href="./assets/privacy-DRJifZoT.html">
+<noscript><style>[style*=opacity\:0]{opacity:1!important;filter:none!important;transform:none!important}</style></noscript>
+  <script type="module" crossorigin src="./assets/main-DSNhzzRI.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-DHX_wrbh.css">
+</head>
+<body>
+<div id="root" data-page="privacy" data-lang="en"><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="container"><a class="brand" href="index.html" aria-label="Pulsar"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect width="64" height="64" rx="14.4" fill="#fff"></rect><polyline points="12.2,33.9 22.4,33.9 25.3,37.8 28.2,17.9 31.8,44 34.6,33.9 44.8,33.9" fill="none" stroke="#0a0a0a" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="50.6" cy="33.9" r="3.5" fill="#34C759"></circle></svg>PULSAR</a><nav class="nav" aria-label="Main"><a href="how-to-use.html">How to use</a><a class="hide-sm" href="privacy.html" aria-current="page">Privacy</a><a class="hide-sm" href="terms.html">Terms</a><a href="es/privacy.html" hrefLang="es">Español</a></nav></div><div class="progress" style="transform:scaleX(0)"></div></header><main id="main"><section class="doc-hero"><div class="container"><h1 style="opacity:0;transform:translateY(30px)">Privacy Policy</h1><p style="opacity:0;transform:translateY(20px)">Pulsar · Effective date: 3 October 2026</p></div></section><div class="container doc"><nav class="toc" aria-label="On this page"><strong>On this page</strong><ol><li><a href="#who-we-are" class="active">Who we are</a></li><li><a href="#the-short-version">The short version</a></li><li><a href="#what-pulsar-stores-on-your-device">What Pulsar stores on your device</a></li><li><a href="#network-connections">Network connections</a></li><li><a href="#permissions">Permissions</a></li><li><a href="#data-you-share-yourself">Data you share yourself</a></li><li><a href="#third-parties">Third parties</a></li><li><a href="#your-rights">Your rights</a></li><li><a href="#children">Children</a></li><li><a href="#security">Security</a></li><li><a href="#changes-to-this-policy">Changes to this policy</a></li><li><a href="#contact">Contact</a></li></ol></nav><article class="prose" style="opacity:0"><h1>Privacy Policy</h1>
+<p><strong>Pulsar</strong> · Effective date: 3 October 2026</p>
+<p>Pulsar is a monitoring app for developers. It checks the status of the APIs you add through one authenticated <code>/pulsar</code> endpoint. Pulsar is designed to work without an account and without our servers: <strong>we do not collect, receive, store or sell any personal data about you.</strong></p>
+<h2 id="who-we-are">Who we are</h2>
+<p>Pulsar is published by <strong>ARK PLATFORMS, EUROPE LIMITED</strong>, a private limited company registered in England and Wales under company number <strong>16762355</strong>, with its registered office at Office 12 Initial Business Centre, Wilson Business Park, Manchester, M40 8WN, United Kingdom (&quot;we&quot;, &quot;us&quot;).</p>
+<p>Contact for any privacy question or request: <strong><a href="mailto:info@arkplatforms.eu">info@arkplatforms.eu</a></strong></p>
+<h2 id="the-short-version">The short version</h2>
+<ul>
+<li>No account, no sign-in, no email address.</li>
+<li>No analytics, advertising, tracking, telemetry or crash reporting.</li>
+<li>Pulsar has no backend: your projects, tokens and history never reach us.</li>
+<li>Everything Pulsar stores stays on your device, and you can delete it at any time.</li>
+</ul>
+<h2 id="what-pulsar-stores-on-your-device">What Pulsar stores on your device</h2>
+<div class="table"><table><thead><tr><th>Data</th><th>Where it is kept</th><th>How long</th></tr></thead><tbody><tr><td>Projects: name, environment, base URL and endpoint path</td><td>App database on your device</td><td>Until you delete the project</td></tr><tr><td>Project tokens</td><td>iOS Keychain / Android Keystore only, readable only by Pulsar on this device</td><td>Until you remove the token or the project</td></tr><tr><td>Check history, activity and incidents</td><td>App database on your device</td><td>7, 30 or 90 days (you choose in Settings)</td></tr><tr><td>Settings (language, appearance, intervals, notifications, App Lock, app icon)</td><td>App database on your device</td><td>Until you change or delete them</td></tr></tbody></table></div>
+<p>Tokens are never shown again after you save them and are never written to the database, logs, notifications or exported files. On Android, Pulsar&#x27;s data is excluded from cloud backup and device-to-device transfer. On iOS, tokens are stored as device-only Keychain items and are not synced to iCloud.</p>
+<h2 id="network-connections">Network connections</h2>
+<p>Pulsar only connects to addresses that <strong>you</strong> enter:</p>
+<ul>
+<li><strong>Monitoring checks:</strong> a <code>GET</code> request to the base URL and endpoint of each project you add, with your token sent only in the <code>Authorization: Bearer</code> header. HTTPS is required except for development servers on your local network, which the app marks as &quot;Not Secure&quot;.</li>
+<li><strong>Developer tools:</strong> the latency benchmark sends requests to a project you choose, and the TLS inspector opens a connection to the host you type, to read its certificate.</li>
+</ul>
+<p>The servers you monitor belong to you or to the organisation you work for. They receive the request that Pulsar sends (including your IP address and the token you configured), as with any HTTP client. Pulsar does not send any data to us or to any third party.</p>
+<h2 id="permissions">Permissions</h2>
+<ul>
+<li><strong>Notifications:</strong> to tell you when a project&#x27;s state changes. Notifications are created on your device. You can turn them off in Settings or in your device settings.</li>
+<li><strong>Face ID / Touch ID / device passcode (App Lock, optional):</strong> handled entirely by your operating system. Pulsar never receives your biometric data; it only receives &quot;unlocked&quot; or &quot;not unlocked&quot;.</li>
+<li><strong>Local network (iOS):</strong> only used when you monitor a development server on your local network.</li>
+<li><strong>Background refresh:</strong> lets the system run occasional checks while Pulsar is closed. iOS and Android decide when this happens.</li>
+</ul>
+<h2 id="data-you-share-yourself">Data you share yourself</h2>
+<p>Some features create files only when you ask for them, and hand them to your device&#x27;s share sheet so that you choose where they go:</p>
+<ul>
+<li><strong>Export projects:</strong> names, environments, URLs and endpoint paths. Never tokens, history or settings.</li>
+<li><strong>Diagnostics:</strong> app and system versions, settings, hosts and endpoint paths, recent status codes and whether a token exists. Never tokens or project names. Review it before sharing.</li>
+<li><strong>Incident reports and code snippets</strong> from the developer tools. Snippets always use the placeholder <code>$PULSAR_TOKEN</code> instead of your token.</li>
+</ul>
+<p>If you send any of these to us (for example by email to ask for help), we use them only to answer you and delete them when they are no longer needed.</p>
+<h2 id="third-parties">Third parties</h2>
+<p>Pulsar is distributed through the Apple App Store and Google Play. Apple and Google may collect information about downloads and app performance under their own privacy policies; we do not control that processing, and they do not share your Pulsar data with us. Pulsar does not include third-party analytics, advertising or tracking SDKs.</p>
+<h2 id="your-rights">Your rights</h2>
+<p>Under the UK GDPR, the EU GDPR and similar laws you have rights of access, rectification, erasure, restriction, portability and objection. Because we do not hold personal data about you, the data Pulsar keeps is under your control on your device:</p>
+<ul>
+<li>Delete a single project, its token and its history from the project screen.</li>
+<li><strong>Settings › Data › Clear history</strong> removes all checks, activity and incidents.</li>
+<li><strong>Settings › Data › Delete all data</strong> removes projects, tokens, history and settings.</li>
+<li>Uninstalling the app removes its database. On iOS, use <em>Delete all data</em> first, because Keychain items can remain after uninstalling.</li>
+</ul>
+<p>If you contact us, we will answer within one month. You also have the right to complain to a data protection authority, such as the UK Information Commissioner&#x27;s Office (ico.org.uk) or the authority in your EU country of residence.</p>
+<h2 id="children">Children</h2>
+<p>Pulsar is a tool for software developers and is not directed at children under 16. We do not knowingly collect data from children; in any case, Pulsar does not collect personal data.</p>
+<h2 id="security">Security</h2>
+<p>Tokens are protected by the iOS Keychain and Android Keystore. Certificate validation is always on, HTTPS-to-HTTP redirects are blocked, and the token is never forwarded to a different host. Optional App Lock protects the app with Face ID, fingerprint or your device passcode.</p>
+<h2 id="changes-to-this-policy">Changes to this policy</h2>
+<p>If this policy changes, we will update the effective date above and publish the new version on this page and inside the app. If a change ever meant that Pulsar would start sending data off your device, it would only happen with your explicit consent in the app.</p>
+<h2 id="contact">Contact</h2>
+<p>ARK PLATFORMS, EUROPE LIMITED · Office 12 Initial Business Centre, Wilson Business Park, Manchester, M40 8WN, United Kingdom · <strong><a href="mailto:info@arkplatforms.eu">info@arkplatforms.eu</a></strong></p></article></div></main><footer class="site-footer"><div class="container"><div class="who"><strong><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect width="64" height="64" rx="14.4" fill="#fff"></rect><polyline points="12.2,33.9 22.4,33.9 25.3,37.8 28.2,17.9 31.8,44 34.6,33.9 44.8,33.9" fill="none" stroke="#0a0a0a" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="50.6" cy="33.9" r="3.5" fill="#34C759"></circle></svg>Pulsar</strong><span>Pulsar is made by ARK PLATFORMS, EUROPE LIMITED, registered in England and Wales, no. 16762355.</span><a href="mailto:info@arkplatforms.eu">info@arkplatforms.eu</a></div><nav aria-label="Footer"><a href="how-to-use.html">How to use</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></nav></div></footer></div>
+</body>
+</html>

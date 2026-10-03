@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to use · Pulsar</title>
+<meta name="description" content="Set up GET /pulsar, add your project and read its status in ten minutes.">
+<meta property="og:title" content="How to use · Pulsar">
+<meta property="og:description" content="Set up GET /pulsar, add your project and read its status in ten minutes.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="es" href="./assets/how-to-use-sM4gY6fG.html">
+<noscript><style>[style*=opacity\:0]{opacity:1!important;filter:none!important;transform:none!important}</style></noscript>
+  <script type="module" crossorigin src="./assets/main-DSNhzzRI.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-DHX_wrbh.css">
+</head>
+<body>
+<div id="root" data-page="how-to-use" data-lang="en"><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="container"><a class="brand" href="index.html" aria-label="Pulsar"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect width="64" height="64" rx="14.4" fill="#fff"></rect><polyline points="12.2,33.9 22.4,33.9 25.3,37.8 28.2,17.9 31.8,44 34.6,33.9 44.8,33.9" fill="none" stroke="#0a0a0a" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="50.6" cy="33.9" r="3.5" fill="#34C759"></circle></svg>PULSAR</a><nav class="nav" aria-label="Main"><a href="how-to-use.html" aria-current="page">How to use</a><a class="hide-sm" href="privacy.html">Privacy</a><a class="hide-sm" href="terms.html">Terms</a><a href="es/how-to-use.html" hrefLang="es">Español</a></nav></div><div class="progress" style="transform:scaleX(0)"></div></header><main id="main"><section class="doc-hero"><div class="container"><h1 style="opacity:0;transform:translateY(30px)">How to use Pulsar</h1><p style="opacity:0;transform:translateY(20px)">Pulsar shows the health of your APIs and services on your phone. You add one endpoint to your backend, <code>GET /pulsar</code>, protect it with one token, and Pulsar reads it. This guide takes about ten minutes, from an empty project to your first notification.</p></div></section><div class="container doc"><nav class="toc" aria-label="On this page"><strong>On this page</strong><ol><li><a href="#1-what-you-need" class="active">1. What you need</a></li><li><a href="#2-create-a-token">2. Create a token</a></li><li><a href="#3-add-get-pulsar-to-your-api">3. Add GET /pulsar to your API</a></li><li><a href="#4-add-your-project-in-pulsar">4. Add your project in Pulsar</a></li><li><a href="#5-read-the-status">5. Read the status</a></li><li><a href="#6-activity-and-notifications">6. Activity and notifications</a></li><li><a href="#7-how-often-pulsar-checks">7. How often Pulsar checks</a></li><li><a href="#8-local-development">8. Local development</a></li><li><a href="#9-developer-tools">9. Developer tools</a></li><li><a href="#10-security-and-privacy">10. Security and privacy</a></li><li><a href="#11-make-it-yours">11. Make it yours</a></li><li><a href="#12-troubleshooting">12. Troubleshooting</a></li></ol></nav><article class="prose" style="opacity:0"><h1>How to use Pulsar</h1>
+<p>Pulsar shows the health of your APIs and services on your phone. You add <strong>one endpoint</strong> to your backend, <code>GET /pulsar</code>, protect it with <strong>one token</strong>, and Pulsar reads it. This guide takes about ten minutes, from an empty project to your first notification.</p>
+<h2 id="1-what-you-need">1. What you need</h2>
+<ul>
+<li>An API or backend you can deploy, in any language or framework.</li>
+<li>A place to set environment variables (a <code>.env</code> file, your hosting dashboard or your CI secrets).</li>
+<li>Pulsar installed on an iPhone (iOS 15 or later) or Android phone (Android 6 or later).</li>
+</ul>
+<p>No account, no SDK and no third-party service are needed.</p>
+<h2 id="2-create-a-token">2. Create a token</h2>
+<p>Generate a long random token. It is the only key that can read your status, so treat it like a password:</p>
+<pre><code class="language-bash">openssl rand -hex 32
+</code></pre>
+<p>You can also use <strong>Developer tools › Token generator</strong> inside the app, which creates a 256-bit token on your device.</p>
+<p>Add it to your server&#x27;s environment, never to your source code:</p>
+<pre><code class="language-env">PULSAR_ENABLED=true
+PULSAR_TOKEN=&lt;your-token&gt;
+</code></pre>
+<p>If <code>PULSAR_ENABLED</code> is not exactly <code>true</code>, or the token is empty, the endpoint must answer <code>404 Not Found</code>, as if it did not exist.</p>
+<h2 id="3-add-get-pulsar-to-your-api">3. Add GET /pulsar to your API</h2>
+<p>The endpoint checks your components (database, cache, workers, external services) and returns JSON:</p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;operational&quot;,
+  &quot;components&quot;: [
+    { &quot;name&quot;: &quot;API&quot;, &quot;state&quot;: &quot;operational&quot;, &quot;uptime30d&quot;: 1 },
+    { &quot;name&quot;: &quot;PostgreSQL&quot;, &quot;state&quot;: &quot;operational&quot;, &quot;uptime30d&quot;: 0.9999 },
+    { &quot;name&quot;: &quot;Redis&quot;, &quot;state&quot;: &quot;degraded&quot;, &quot;uptime30d&quot;: 0.9872 }
+  ],
+  &quot;checkedAt&quot;: &quot;2026-10-03T09:41:00.000Z&quot;
+}
+</code></pre>
+<p>The rules that matter:</p>
+<ul>
+<li>Read the token only from the <code>Authorization: Bearer &lt;token&gt;</code> header, and compare it in constant time. Never accept it in the URL.</li>
+<li>A missing or wrong token returns <code>401 Unauthorized</code> and runs no checks.</li>
+<li>Answer with <code>Content-Type: application/json</code> and <code>Cache-Control: no-store</code>.</li>
+<li>A component that is down is not an error: still return <code>200 OK</code>, with that component in <code>major_outage</code>.</li>
+<li><code>uptime30d</code> is a number between <code>0</code> and <code>1</code> (for example <code>0.9999</code> is 99.99%).</li>
+</ul>
+<p>A minimal example with Node.js and Express:</p>
+<pre><code class="language-js">import crypto from &quot;node:crypto&quot;;
+import express from &quot;express&quot;;
+
+const app = express();
+
+app.get(&quot;/pulsar&quot;, async (req, res) =&gt; {
+  const token = process.env.PULSAR_TOKEN ?? &quot;&quot;;
+  if (process.env.PULSAR_ENABLED !== &quot;true&quot; || !token) return res.sendStatus(404);
+
+  const given = (req.get(&quot;authorization&quot;) ?? &quot;&quot;).replace(/^Bearer /, &quot;&quot;);
+  const a = crypto.createHash(&quot;sha256&quot;).update(given).digest();
+  const b = crypto.createHash(&quot;sha256&quot;).update(token).digest();
+  if (!crypto.timingSafeEqual(a, b)) {
+    return res.set(&quot;WWW-Authenticate&quot;, &quot;Bearer&quot;).sendStatus(401);
+  }
+
+  const db = await checkDatabase(); // &quot;operational&quot; | &quot;degraded&quot; | &quot;major_outage&quot;
+  const components = [
+    { name: &quot;API&quot;, state: &quot;operational&quot;, uptime30d: 1 },
+    { name: &quot;PostgreSQL&quot;, state: db, uptime30d: 0.9999 },
+  ];
+  const status = components.some((c) =&gt; c.state === &quot;major_outage&quot;)
+    ? &quot;partial_outage&quot;
+    : components.some((c) =&gt; c.state === &quot;degraded&quot;) ? &quot;degraded&quot; : &quot;operational&quot;;
+
+  res.set(&quot;Cache-Control&quot;, &quot;no-store&quot;)
+    .json({ status, components, checkedAt: new Date().toISOString() });
+});
+</code></pre>
+<p>Complete, tested guides for <strong>Node.js, Express, Fastify, NestJS, Next.js, FastAPI, Django, Laravel, Go, Rust, .NET and Spring Boot</strong> are inside the app in <strong>Setup Guide</strong>, together with the full <strong>Pulsar Protocol</strong> specification.</p>
+<p>Deploy, then check it from your computer:</p>
+<pre><code class="language-bash">curl -H &quot;Authorization: Bearer $PULSAR_TOKEN&quot; https://api.example.com/pulsar
+</code></pre>
+<h2 id="4-add-your-project-in-pulsar">4. Add your project in Pulsar</h2>
+<p>Tap <strong>+</strong> on the Projects screen and fill in:</p>
+<div class="table"><table><thead><tr><th>Field</th><th>What to enter</th></tr></thead><tbody><tr><td>Project name</td><td>Any name you recognise, e.g. &quot;Billing API&quot;</td></tr><tr><td>Environment</td><td>Development, Staging or Production</td></tr><tr><td>Base URL</td><td>Your API&#x27;s address, e.g. <code>https://api.example.com</code></td></tr><tr><td>Pulsar endpoint</td><td><code>/pulsar</code>, unless you used another path</td></tr><tr><td>Token</td><td>The value of <code>PULSAR_TOKEN</code></td></tr></tbody></table></div>
+<p>Tap <strong>Test Connection</strong>. Pulsar checks, step by step, that the server is reachable, that the token is accepted, that the endpoint exists and that the response follows the protocol, and shows how many components it found. Fix anything marked in red, then tap <strong>Add Project</strong>.</p>
+<p>The token is saved in the iOS Keychain or Android Keystore and is never shown again. You can replace it later from the project menu.</p>
+<h2 id="5-read-the-status">5. Read the status</h2>
+<p>The Projects screen shows every project with its global status, response time, uptime and a 24-hour timeline. Open a project to see each component.</p>
+<div class="table"><table><thead><tr><th>State</th><th>Meaning</th><th>Color</th></tr></thead><tbody><tr><td>Operational</td><td>Working normally</td><td>Green</td></tr><tr><td>Degraded</td><td>Working, with reduced performance or errors</td><td>Amber</td></tr><tr><td>Partial outage</td><td>Partially unavailable</td><td>Red</td></tr><tr><td>Major outage</td><td>Unavailable</td><td>Red</td></tr><tr><td>Maintenance</td><td>Intentionally unavailable</td><td>Amber</td></tr><tr><td>Unknown</td><td>The state could not be determined</td><td>Gray</td></tr></tbody></table></div>
+<p>When Pulsar cannot reach your endpoint (no network, timeout, TLS problem, wrong token) the project shows <strong>why</strong> in plain words, and keeps the last known component states so you still see what was working.</p>
+<p>The project screen also shows <strong>Insights</strong> for the last 24 hours or 7 days: how often the endpoint was reachable and operational, latency percentiles and the periods with problems.</p>
+<h2 id="6-activity-and-notifications">6. Activity and notifications</h2>
+<p>Pulsar records <strong>changes</strong>, not every check: a component degrading, an outage, a recovery, an endpoint becoming unreachable or reachable again. You find them in the <strong>Activity</strong> tab, grouped by day, with how long each incident lasted.</p>
+<p>The first time you add a project, Pulsar asks for permission to send notifications. In <strong>Settings › Notifications</strong> you choose whether to be notified of state changes and of recoveries. To silence one project for a while (during a deployment, for example), open its menu and choose <strong>Mute notifications</strong>. Muted projects are still checked and recorded.</p>
+<h2 id="7-how-often-pulsar-checks">7. How often Pulsar checks</h2>
+<p>While Pulsar is open, every project is checked at the interval you choose in <strong>Settings › Check interval</strong> (30 seconds to 30 minutes, or manually). You can always pull down to check now.</p>
+<p>When the app is closed, iOS and Android decide when background checks run: at most every 15 minutes, often less, and never while the phone restricts background activity. <strong>A phone cannot monitor 24/7.</strong> Use Pulsar to keep an eye on your projects, not as your only alerting system for critical services.</p>
+<h2 id="8-local-development">8. Local development</h2>
+<p>To check an API running on your computer:</p>
+<ul>
+<li>On a phone, <code>localhost</code> means the phone itself. Use your computer&#x27;s local IP instead, e.g. <code>http://192.168.1.42:3000</code>, and make sure both are on the same Wi-Fi.</li>
+<li>The Android emulator reaches your computer at <code>http://10.0.2.2:&lt;port&gt;</code>. The iOS Simulator can use <code>http://localhost:&lt;port&gt;</code>.</li>
+<li>Plain HTTP is only allowed for the <strong>Development</strong> environment and private network addresses, and Pulsar marks it <strong>Not Secure</strong>. Production always requires HTTPS.</li>
+<li>On iPhone, allow <strong>Local Network</strong> for Pulsar when asked (Settings › Privacy &amp; Security › Local Network).</li>
+</ul>
+<h2 id="9-developer-tools">9. Developer tools</h2>
+<p>Tap the code icon on the Projects screen. Everything runs on your device:</p>
+<ul>
+<li><strong>Payload validator</strong> — paste a response and check it against the protocol.</li>
+<li><strong>Request snippets</strong> — curl, HTTPie, fetch, Python and a GitHub Actions check, with <code>$PULSAR_TOKEN</code> instead of your token.</li>
+<li><strong>Token generator</strong> — secure 256-bit tokens and the matching <code>.env</code> line.</li>
+<li><strong>SLA calculator</strong> — downtime allowed by 99.9%, 99.99% and other targets.</li>
+<li><strong>Latency benchmark</strong> — sequential requests to a project with p50, p95 and jitter.</li>
+<li><strong>TLS inspector</strong> — certificate issuer, expiry and days left for any host.</li>
+<li><strong>Incident report</strong> — a Markdown summary of a project&#x27;s incidents, ready for postmortems.</li>
+</ul>
+<h2 id="10-security-and-privacy">10. Security and privacy</h2>
+<ul>
+<li>Tokens live only in the Keychain or Keystore and travel only in the <code>Authorization</code> header.</li>
+<li>Certificate validation is always on, HTTPS-to-HTTP redirects are blocked, and the token is never sent to a different host.</li>
+<li><strong>App Lock</strong> (Settings › Security) protects Pulsar with Face ID, fingerprint or your device passcode, after the delay you choose.</li>
+<li>Pulsar has no account, no servers and no analytics. Read the <a href="privacy.html">Privacy Policy</a>.</li>
+</ul>
+<h2 id="11-make-it-yours">11. Make it yours</h2>
+<ul>
+<li><strong>Appearance:</strong> system, light or dark.</li>
+<li><strong>App icon:</strong> Light, Dark, Pulse or Ring (Settings › App icon). On Android the new icon appears after you leave the app.</li>
+<li><strong>Language:</strong> English, Español, Français, Deutsch, Русский, 中文, العربية or Norsk bokmål (Settings › Language).</li>
+<li><strong>Order and filters:</strong> drag projects to reorder them; filter by status.</li>
+<li><strong>Export and import:</strong> move your projects to another phone with a JSON file. Tokens are never exported; add them again on the new phone.</li>
+</ul>
+<h2 id="12-troubleshooting">12. Troubleshooting</h2>
+<div class="table"><table><thead><tr><th>Pulsar says</th><th>What to check</th></tr></thead><tbody><tr><td>Authentication failed</td><td>The token in Pulsar matches <code>PULSAR_TOKEN</code> on the server, with no spaces. The server reads the <code>Authorization: Bearer</code> header.</td></tr><tr><td>Pulsar endpoint not found</td><td><code>PULSAR_ENABLED=true</code> and <code>PULSAR_TOKEN</code> are set on the deployed server, and the path is right.</td></tr><tr><td>Request timed out</td><td>The endpoint answers within the timeout (Settings › Connection timeout). Run slow checks concurrently with their own timeouts.</td></tr><tr><td>Invalid Pulsar response</td><td>Open <strong>View validation errors</strong>: each one names the field and what was expected. Unknown extra fields are fine.</td></tr><tr><td>TLS handshake failed / TLS error</td><td>The server has a valid certificate for that host name. Self-signed certificates are rejected.</td></tr><tr><td>Host not found / Connection refused</td><td>The base URL is right and the server is running. On a phone, <code>localhost</code> is the phone itself (see Local development).</td></tr><tr><td>Not Secure</td><td>You are using HTTP. Use HTTPS outside local development.</td></tr><tr><td>No notifications</td><td>Notifications are allowed for Pulsar in the system settings, the project is not muted, and background refresh is on.</td></tr></tbody></table></div>
+<p>Still stuck? Write to <strong><a href="mailto:info@arkplatforms.eu">info@arkplatforms.eu</a></strong> and include, if you can, the file from <strong>Settings › Developer › Diagnostics › Export diagnostics</strong> (it never contains tokens).</p></article></div></main><footer class="site-footer"><div class="container"><div class="who"><strong><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect width="64" height="64" rx="14.4" fill="#fff"></rect><polyline points="12.2,33.9 22.4,33.9 25.3,37.8 28.2,17.9 31.8,44 34.6,33.9 44.8,33.9" fill="none" stroke="#0a0a0a" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="50.6" cy="33.9" r="3.5" fill="#34C759"></circle></svg>Pulsar</strong><span>Pulsar is made by ARK PLATFORMS, EUROPE LIMITED, registered in England and Wales, no. 16762355.</span><a href="mailto:info@arkplatforms.eu">info@arkplatforms.eu</a></div><nav aria-label="Footer"><a href="how-to-use.html">How to use</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></nav></div></footer></div>
+</body>
+</html>
